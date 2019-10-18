@@ -1,5 +1,5 @@
 import React from "react";
-import { range } from "lodash-es";
+import { range } from "lodash";
 
 export default function Slider({
   name,
