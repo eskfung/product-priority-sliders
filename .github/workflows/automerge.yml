@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Merge pull requests
-        uses: pascalgn/automerge-action@v0.9.0 # https://github.com/marketplace/actions/merge-pull-requests
+        uses: pascalgn/automerge-action@v0.10.0 # https://github.com/marketplace/actions/merge-pull-requests
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           MERGE_DELETE_BRANCH: true
