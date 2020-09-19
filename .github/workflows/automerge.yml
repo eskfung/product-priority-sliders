@@ -22,6 +22,8 @@ jobs:
     steps:
       - name: Merge pull requests
         uses: pascalgn/automerge-action@v0.10.0 # https://github.com/marketplace/actions/merge-pull-requests
+        with:
+          args: "--trace"
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           MERGE_DELETE_BRANCH: true
