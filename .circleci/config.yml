@@ -1,39 +1,14 @@
-version: 2
-
-yarn_anchors:
-  yarn_restore_cache: &yarn_restore_cache
-    restore_cache:
-      keys:
-        - v1-dependencies-{{ arch }}-{{ checksum "yarn.lock" }}
-        - v1-dependencies-{{ arch }}-
-  npm_install_yarn: &npm_install_yarn
-    run:
-      name: npm install yarn
-      command: |
-        YARN_VERSION=1.19.1
-        if [[ $(yarn --version) != $YARN_VERSION ]]; then
-          sudo npm install -g yarn@$YARN_VERSION;
-          sudo chmod a+x /usr/local/bin/yarn
-        fi
-  yarn_install: &yarn_install
-    run: yarn install
-  yarn_save_cache: &yarn_save_cache
-    save_cache:
-      key: v1-dependencies-{{ arch }}-{{ checksum "yarn.lock" }}
-      paths:
-        - ./node_modules
+version: 2.1
+orbs:
+  node: circleci/node@4.3.0
 
 jobs:
   test:
-    docker:
-      - image: circleci/node:10.15.3
-    working_directory: ~/repo
+    executor: node/default
     steps:
       - checkout
-      - *yarn_restore_cache
-      - *npm_install_yarn
-      - *yarn_install
-      - *yarn_save_cache
+      - node/install-packages:
+          pkg-manager: yarn
       - run:
           name: yarn test
           command: yarn test:coverage --ci --color --reporters=default --reporters=jest-junit --runInBand
@@ -43,27 +18,19 @@ jobs:
           path: ./tmp/test-results
 
   lint:
-    docker:
-      - image: circleci/node:10.15.3
-    working_directory: ~/repo
+    executor: node/default
     steps:
       - checkout
-      - *yarn_restore_cache
-      - *npm_install_yarn
-      - *yarn_install
-      - *yarn_save_cache
+      - node/install-packages:
+          pkg-manager: yarn
       - run: yarn lint
 
   audit:
-    docker:
-      - image: circleci/node:10.15.3
-    working_directory: ~/repo
+    executor: node/default
     steps:
       - checkout
-      - *yarn_restore_cache
-      - *npm_install_yarn
-      - *yarn_install
-      - *yarn_save_cache
+      - node/install-packages:
+          pkg-manager: yarn
       - run: yarn audit
 
 workflows:
@@ -76,8 +43,7 @@ workflows:
           filters:
             branches:
               only:
-                - development
-                - master
+                - main
   cron:
     jobs:
       - test
@@ -89,4 +55,4 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
