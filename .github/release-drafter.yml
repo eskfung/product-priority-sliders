@@ -1,0 +1,4 @@
+autolabeler:
+  - label: "dependencies"
+    branch:
+      - '/dependabot\/.+/'
