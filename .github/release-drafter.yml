@@ -2,3 +2,7 @@ autolabeler:
   - label: "dependencies"
     branch:
       - '/dependabot\/.+/'
+template: |
+  ## What’s Changed
+
+  $CHANGES
