@@ -1,7 +1,22 @@
 autolabeler:
   - label: "dependencies"
     branch:
-      - '/dependabot\/.+/'
+      - "/dependabot\/*"
+      - "/bump-dependencies\/*"
+  - label: "pending-acceptance"
+    branch:
+      - "/feature(s)?\/*"
+      - "/bugfix(es)?\/*"
+  - label: "feature"
+    branch:
+      - "/feature(s)?\/*"
+  - label: "chore"
+    branch:
+      - "/chore(s)?\/*"
+  - label: "bugfix"
+    branch:
+      - "/bugfix(es)?\/*"
+
 template: |
   ## What’s Changed
 
