@@ -9,8 +9,8 @@ on:
   pull_request_review:
     types: [submitted, edited]
   push:
-    branches:
-      - "!main"
+    branches-ignore:
+      - main
 
 jobs:
   require_pr_labels:
