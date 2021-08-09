@@ -1,21 +1,21 @@
 autolabeler:
   - label: "dependencies"
     branch:
-      - "/dependabot\/*"
-      - "/bump-dependencies\/*"
+      - "/dependabot\/.+/"
+      - "/bump-dependencies\/.+/"
   - label: "pending-acceptance"
     branch:
-      - "/feature(s)?\/*"
-      - "/bugfix(es)?\/*"
+      - "/feature(s)?\/.+/"
+      - "/bugfix(es)?\/.+/"
   - label: "feature"
     branch:
-      - "/feature(s)?\/*"
+      - "/feature(s)?\/.+/"
   - label: "chore"
     branch:
-      - "/chore(s)?\/*"
+      - "/chore(s)?\/.+/"
   - label: "bugfix"
     branch:
-      - "/bugfix(es)?\/*"
+      - "/bugfix(es)?\/.+/"
 
 template: |
   ## What’s Changed
