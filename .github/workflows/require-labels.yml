@@ -1,7 +1,8 @@
 name: Require Pull Request Labels
 
 on:
-  label
+  label:
+    types: [created, edited, deleted]
 
 jobs:
   require_pr_labels:
