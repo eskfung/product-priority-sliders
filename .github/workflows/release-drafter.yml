@@ -1,5 +1,9 @@
 name: Release Drafter
 
+permissions:
+  contents: write      # Create draft releases
+  pull-requests: write # Modify pull request labels
+
 on:
   push:
     # branches to consider in the event; optional, defaults to all
