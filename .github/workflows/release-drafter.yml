@@ -39,6 +39,6 @@ jobs:
           labels: "pending-acceptance"
       - uses: mheap/github-action-required-labels@v1
         with:
-          mode: exactly
+          mode: minimum
           count: 1
           labels: "accepted, chore, dependencies"
