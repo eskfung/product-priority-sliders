@@ -1,7 +1,7 @@
 name: Require Pull Request Labels
 
 permissions:
-  pull-requests: read  # Check pull request labels
+  pull-requests: none  # Check pull request labels
 
 on:
   pull_request:
