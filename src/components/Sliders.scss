@@ -1,0 +1,10 @@
+$positive-color: cornflower-blue;
+$negative-color: darkred;
+
+.Points {
+  color: $positive-color;
+}
+
+.Points--negative {
+  color: $negative-color;
+}
