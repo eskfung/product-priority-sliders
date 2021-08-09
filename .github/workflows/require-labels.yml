@@ -9,11 +9,12 @@ on:
   pull_request_review:
     types: [submitted, edited]
   push:
+    branches:
+      - "!main"
 
 jobs:
   require_pr_labels:
     runs-on: ubuntu-latest
-    if: github.ref.associatedPullRequests
     steps:
       - uses: mheap/github-action-required-labels@v1
         with:
