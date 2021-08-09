@@ -9,7 +9,6 @@
     "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-jest": "^22.6.4",
     "eslint-plugin-prettier": "^3.1.0",
-    "husky": "^2.4.0",
     "jest-enzyme": "^7.0.2",
     "jest-junit": "^6.4.0",
     "lint-staged": "^9.2.1",
@@ -28,6 +27,9 @@
     "stylelint-declaration-use-variable": "^1.6.1",
     "stylelint-scss": "^3.8.0"
   },
+  "devDependencies": {
+    "husky": "^7.0.1"
+  },
   "scripts": {
     "prestart": "node bin/pre-start",
     "start": "react-scripts start",
@@ -38,7 +40,8 @@
     "test": "react-scripts test",
     "test:coverage": "react-scripts test --env=jsdom --coverage",
     "eject": "react-scripts eject",
-    "heroku-postbuild": "npm-run-all build"
+    "heroku-postbuild": "npm-run-all build",
+    "prepare": "husky install"
   },
   "lint-staged": {
     "src/**/*.{js,jsx}": "eslint",
@@ -65,10 +68,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   }
 }
