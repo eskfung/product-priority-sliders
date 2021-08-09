@@ -27,3 +27,13 @@ jobs:
         #   disable-autolabeler: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: mheap/github-action-required-labels@v1
+        with:
+          mode: exactly
+          count: 0
+          labels: "pending-acceptance"
+      - uses: mheap/github-action-required-labels@v1
+        with:
+          mode: exactly
+          count: 1
+          labels: "accepted, chore"
