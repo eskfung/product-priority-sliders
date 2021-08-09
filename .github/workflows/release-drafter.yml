@@ -1,5 +1,10 @@
 name: Release Drafter
 
+permissions:
+  checks: none
+  pull-requests: write
+  statuses: none
+
 on:
   push:
     # branches to consider in the event; optional, defaults to all
