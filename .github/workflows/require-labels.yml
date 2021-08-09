@@ -8,9 +8,6 @@ on:
     types: [labeled, unlabeled]
   pull_request_review:
     types: [submitted, edited]
-  push:
-    branches-ignore:
-      - main
 
 jobs:
   require_pr_labels:
