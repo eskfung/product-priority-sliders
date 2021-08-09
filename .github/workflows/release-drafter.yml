@@ -27,6 +27,10 @@ jobs:
         #   disable-autolabeler: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  require_pr_labels:
+    runs-on: ubuntu-latest
+    if: github.ref != 'refs/heads/main'
+    steps:
       - uses: mheap/github-action-required-labels@v1
         with:
           mode: exactly
