@@ -27,6 +27,11 @@ jobs:
         #   disable-autolabeler: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  require_pr_labels:
+    runs-on: ubuntu-latest
+    needs: update_release_draft
+    if: github.ref != 'refs/heads/main'
+    steps:
       - uses: mheap/github-action-required-labels@v1
         with:
           mode: exactly
@@ -36,4 +41,4 @@ jobs:
         with:
           mode: exactly
           count: 1
-          labels: "accepted, chore"
+          labels: "accepted, chore, dependencies"

@@ -1,5 +1,6 @@
 import React from "react";
 import { range } from "lodash";
+import "./Slider.scss";
 
 export default function Slider({
   name,
@@ -11,10 +12,11 @@ export default function Slider({
   step = 1
 }) {
   return (
-    <div>
-      <label>
-        {label}
+    <label className="Slider">
+      <div>{label}</div>
+      <div className="Slider__control">
         <input
+          className="Slider__input"
           type="range"
           name={name}
           value={value}
@@ -30,8 +32,8 @@ export default function Slider({
             <option key={value} value={value} label={value}></option>
           ))}
         </datalist>
-      </label>
-      <span>{value}</span>
-    </div>
+        <span>{value}</span>
+      </div>
+    </label>
   );
 }
