@@ -1,4 +1,0 @@
-pending-acceptance: ["features/*", "feature/*", "bugfixes/*", "bugfix/*"]
-features: ["features/*", "feature/*"]
-chores: ["chores/*", "chore/*"]
-bugfixes: ["bugfixes/*", "bugfix/*"]
