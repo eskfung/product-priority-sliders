@@ -1,0 +1,16 @@
+.Slider {
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.Slider__control {
+  display: flex;
+  flex-grow: 1;
+}
+
+.Slider__input {
+  flex-grow: 1;
+}
