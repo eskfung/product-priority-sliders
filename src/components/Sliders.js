@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import cx from "classnames";
 import Slider from "./Slider";
+import "./Sliders.scss";
 
 export default function Sliders({ constraint = 25 }) {
   const [defectValue, setDefectValue] = useState(0);
@@ -8,13 +10,20 @@ export default function Sliders({ constraint = 25 }) {
   const [featuresValue, setFeaturesValue] = useState(0);
   const [velocityValue, setVelocityValue] = useState(0);
 
-  const pointsRemaining = () =>
+  const pointsRemaining =
     constraint -
     (defectValue + uxValue + visualValue + featuresValue + velocityValue);
 
   return (
     <div>
-      <h1>Points Remaining: {pointsRemaining()}</h1>
+      <h1>
+        Points Remaining:{" "}
+        <span
+          className={cx("Points", { "Points--negative": pointsRemaining < 0 })}
+        >
+          {pointsRemaining}
+        </span>
+      </h1>
       <Slider
         name="defect"
         label="Defect Free"
