@@ -40,4 +40,4 @@ jobs:
         with:
           mode: exactly
           count: 1
-          labels: "accepted, chore"
+          labels: "accepted, chore, dependencies"
