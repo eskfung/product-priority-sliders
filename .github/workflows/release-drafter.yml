@@ -1,9 +1,8 @@
 name: Release Drafter
 
 permissions:
-  checks: none
-  pull-requests: write
-  statuses: none
+  contents: write      # Create draft releases
+  pull-requests: write # Modify pull request labels
 
 on:
   push:
