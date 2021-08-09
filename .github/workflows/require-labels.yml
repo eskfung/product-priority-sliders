@@ -1,0 +1,19 @@
+name: Require Pull Request Labels
+
+on:
+  label
+
+jobs:
+  require_pr_labels:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: mheap/github-action-required-labels@v1
+        with:
+          mode: exactly
+          count: 0
+          labels: "pending-acceptance"
+      - uses: mheap/github-action-required-labels@v1
+        with:
+          mode: minimum
+          count: 1
+          labels: "accepted, chore, dependencies"
