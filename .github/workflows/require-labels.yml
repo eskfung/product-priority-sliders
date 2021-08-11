@@ -1,24 +1,30 @@
 name: Require Pull Request Labels
 
 permissions:
-  pull-requests: none  # Labels are maybe present in metadata already
+  pull-requests: read  # Read PR reviews and labels
 
 on:
   pull_request:
     types: [labeled, unlabeled, opened, edited, reopened, synchronize]
-  pull_request_review:
-    types: [submitted, edited]
 
 jobs:
   require_pr_labels:
     runs-on: ubuntu-latest
     steps:
+      - uses: octokit/request-action@v2.x
+        id: get_reviews
+        with:
+          route: GET /repos/${{ github.repository }}/pulls/${{ github.event.number }}/reviews
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: mheap/github-action-required-labels@v1
+        if: ${{ contains(steps.get_reviews.*.state, 'APPROVED') }}
         with:
           mode: exactly
           count: 0
           labels: "pending-acceptance"
       - uses: mheap/github-action-required-labels@v1
+        if: ${{ contains(steps.get_reviews.*.state, 'APPROVED') }}
         with:
           mode: minimum
           count: 1
