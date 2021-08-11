@@ -17,13 +17,14 @@ jobs:
           route: GET /repos/${{ github.repository }}/pulls/${{ github.event.number }}/reviews
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: "echo outputs: ${{ steps.get_reviews.outputs.data }}"
       - uses: mheap/github-action-required-labels@v1
+        if: ${{ contains(steps.get_reviews.*.state, 'APPROVED') }}
         with:
           mode: exactly
           count: 0
           labels: "pending-acceptance"
       - uses: mheap/github-action-required-labels@v1
+        if: ${{ contains(steps.get_reviews.*.state, 'APPROVED') }}
         with:
           mode: minimum
           count: 1
