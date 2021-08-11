@@ -1,7 +1,7 @@
 name: Require Pull Request Labels
 
 permissions:
-  pull-requests: none  # Labels are maybe present in metadata already
+  pull-requests: read  # Read PR reviews and labels
 
 on:
   pull_request:
