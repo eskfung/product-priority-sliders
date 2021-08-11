@@ -18,13 +18,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: mheap/github-action-required-labels@v1
-        if: ${{ !contains(steps.get_reviews.*.state, 'APPROVED') }}
+        if: ${{ contains(steps.get_reviews.*.state, 'APPROVED') }}
         with:
           mode: exactly
           count: 0
           labels: "pending-acceptance"
       - uses: mheap/github-action-required-labels@v1
-        if: ${{ !contains(steps.get_reviews.*.state, 'APPROVED') }}
+        if: ${{ contains(steps.get_reviews.*.state, 'APPROVED') }}
         with:
           mode: minimum
           count: 1
