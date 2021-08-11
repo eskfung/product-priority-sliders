@@ -6,8 +6,6 @@ permissions:
 on:
   pull_request:
     types: [labeled, unlabeled, opened, edited, reopened, synchronize]
-  pull_request_review:
-    types: [submitted, edited]
 
 jobs:
   require_pr_labels:
