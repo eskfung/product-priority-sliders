@@ -11,10 +11,13 @@ jobs:
   require_pr_labels:
     runs-on: ubuntu-latest
     steps:
-      - name: Dump GitHub context
+      - uses: octokit/request-action@v2.x
+        id: get_reviews
+        with:
+          route: GET /repos/${{ github.repository }}/pulls/${{ github.event.number }}/reviews
         env:
-          GITHUB_CONTEXT: ${{ toJSON(github) }}
-        run: echo "$GITHUB_CONTEXT"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: "echo outputs: ${{ steps.get_reviews.outputs.data }}"
       - uses: mheap/github-action-required-labels@v1
         with:
           mode: exactly
