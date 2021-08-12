@@ -19,10 +19,6 @@ jobs:
           route: GET ${{ github.event.pull_request.url }}/reviews
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Debug reviews response
-        env:
-          REVIEWS_RESPONSE: ${{ fromJson(steps.get_reviews.outputs.data)[0].state }}
-        run: echo "$REVIEWS_RESPONSE"
       - uses: mheap/github-action-required-labels@v1
         if: contains(fromJson(steps.get_reviews.outputs.data)[*].state, 'APPROVED')
         with:
