@@ -24,13 +24,13 @@ jobs:
           REVIEWS_RESPONSE: ${{ fromJson(steps.get_reviews.outputs.data)[0].state }}
         run: echo "$REVIEWS_RESPONSE"
       - uses: mheap/github-action-required-labels@v1
-        if: contains(fromJson(steps.get_reviews.outputs.data)[0].state, 'COMMENTED')
+        if: contains(fromJson(steps.get_reviews.outputs.data)[*].state, 'COMMENTED')
         with:
           mode: exactly
           count: 0
           labels: "pending-acceptance"
       - uses: mheap/github-action-required-labels@v1
-        if: contains(fromJson(steps.get_reviews.outputs.data)[0].state, 'COMMENTED')
+        if: contains(fromJson(steps.get_reviews.outputs.data)[*].state, 'COMMENTED')
         with:
           mode: minimum
           count: 1
