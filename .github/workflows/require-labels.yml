@@ -25,7 +25,7 @@ jobs:
         run: echo "$REVIEWS_RESPONSE"
       - name: Debug reviews response
         env:
-          POST_PROCESSING: ${{ fromJSON(steps.get_reviews.outputs.data)[0].id }}
+          POST_PROCESSING: ${{ fromJSON(steps.get_reviews.outputs.data).*.state }}
         run: echo "$POST_PROCESSING"
       - uses: mheap/github-action-required-labels@v1
         if: contains(steps.get_reviews.*.state, 'APPROVED')
