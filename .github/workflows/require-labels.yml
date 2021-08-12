@@ -13,7 +13,7 @@ jobs:
   check_reviews:
     runs-on: ubuntu-latest
     outputs:
-      reviews: ${{ fromJSON(steps.set-get_reviews.outputs.data) }}
+      reviews: ${{ steps.set-get_reviews.outputs.data }}
     steps:
       - uses: octokit/request-action@v2.x
         id: get_reviews
@@ -31,7 +31,7 @@ jobs:
       #   run: echo "$REVIEWS_RESPONSE"
       - name: Debug reviews response
         env:
-          POST_PROCESSING: ${{ contains(needs.check_reviews.outputs.reviews.*.state, 'APPROVED') }}
+          POST_PROCESSING: ${{ fromJSON(needs.check_reviews.outputs.reviews) }}
         run: echo "$POST_PROCESSING"
       - uses: mheap/github-action-required-labels@v1
         if: contains(steps.get_reviews.*.state, 'APPROVED')
