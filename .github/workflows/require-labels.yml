@@ -25,14 +25,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: [check_reviews]
     steps:
-      # - name: Debug reviews response
-      #   env:
-      #     REVIEWS_RESPONSE: ${{ steps.get_reviews.outputs.data }}
-      #   run: echo "$REVIEWS_RESPONSE"
       - name: Debug reviews response
         env:
-          POST_PROCESSING: ${{ fromJSON(needs.check_reviews.outputs.reviews) }}
-        run: echo "$POST_PROCESSING"
+          REVIEWS_RESPONSE: ${{ needs.check_reviews.outputs.reviews }}
+        run: echo "$REVIEWS_RESPONSE"
       - uses: mheap/github-action-required-labels@v1
         if: contains(steps.get_reviews.*.state, 'APPROVED')
         with:
