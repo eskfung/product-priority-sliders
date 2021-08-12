@@ -10,8 +10,10 @@ on:
     types: [submitted, edited, dismissed]
 
 jobs:
-  require_pr_labels:
+  check_reviews:
     runs-on: ubuntu-latest
+    outputs:
+      reviews: ${{ fromJSON(steps.set-get_reviews.outputs.data) }}
     steps:
       - uses: octokit/request-action@v2.x
         id: get_reviews
@@ -19,13 +21,17 @@ jobs:
           route: GET ${{ github.event.pull_request.url }}/reviews
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  require_pr_labels:
+    runs-on: ubuntu-latest
+    needs: [check_reviews]
+    steps:
+      # - name: Debug reviews response
+      #   env:
+      #     REVIEWS_RESPONSE: ${{ steps.get_reviews.outputs.data }}
+      #   run: echo "$REVIEWS_RESPONSE"
       - name: Debug reviews response
         env:
-          REVIEWS_RESPONSE: ${{ steps.get_reviews.outputs.data }}
-        run: echo "$REVIEWS_RESPONSE"
-      - name: Debug reviews response
-        env:
-          POST_PROCESSING: ${{ fromJSON(steps.get_reviews.outputs.data).*.state }}
+          POST_PROCESSING: ${{ contains(needs.check_reviews.outputs.reviews.*.state, 'APPROVED') }}
         run: echo "$POST_PROCESSING"
       - uses: mheap/github-action-required-labels@v1
         if: contains(steps.get_reviews.*.state, 'APPROVED')
