@@ -21,7 +21,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Debug reviews response
         env:
-          REVIEWS_RESPONSE: ${{ steps.get_reviews.outputs.data }}
+          REVIEWS_RESPONSE: ${{ fromJson(steps.get_reviews.outputs.data)[0].state }}
         run: echo "$REVIEWS_RESPONSE"
       - uses: mheap/github-action-required-labels@v1
         if: contains(steps.get_reviews.outputs.data.*.state, 'COMMENTED')
